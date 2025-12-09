@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2fff, #ff2d95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+        }
+
+        .project-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .project-link {
+            color: #00d4ff;
+        }
+
+        /* Project-specific accent colors */
+        .project-card.satellites {
+            --accent-start: #00d4ff;
+            --accent-end: #0066ff;
+        }
+
+        .project-card.premier-league {
+            --accent-start: #ff0066;
+            --accent-end: #ff6600;
+        }
+
+        .project-card.placeholder {
+            --accent-start: #7b2fff;
+            --accent-end: #ff2d95;
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .project-card.placeholder:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #00d4ff;
+        }
+
+        /* Search bar styling */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Clock */
+        .clock {
+            font-size: 4rem;
+            font-weight: 200;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .date {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .clock {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="clock" id="clock">00:00</div>
+        <div class="date" id="date">Loading...</div>
+        <h1>My Projects</h1>
+        <p>Quick access to all my web applications</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" class="search-box" id="search" placeholder="Search Google..." autofocus>
+    </div>
+
+    <div class="projects-grid">
+        <a href="./satellites/" class="project-card satellites">
+            <div class="project-icon">🛰️</div>
+            <h2>Norwegian Satellites</h2>
+            <p>Real-time tracking of satellites currently passing over Norway. Uses CelesTrak TLE data and satellite.js for orbit calculations.</p>
+            <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Satellite.js</span>
+                <span class="tag">Real-time</span>
+            </div>
+            <div class="project-link">
+                <span>Open Project →</span>
+            </div>
+        </a>
+
+        <a href="./premier-league/" class="project-card premier-league">
+            <div class="project-icon">⚽</div>
+            <h2>Premier League Predictor</h2>
+            <p>AI-powered match score predictions using Poisson distribution. Includes detailed stats, form analysis, and probability matrices.</p>
+            <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Statistics</span>
+                <span class="tag">Poisson</span>
+            </div>
+            <div class="project-link">
+                <span>Open Project →</span>
+            </div>
+        </a>
+
+        <div class="project-card placeholder">
+            <div class="project-icon">🚀</div>
+            <h2>Coming Soon</h2>
+            <p>More projects will be added here as they're created. Stay tuned for new applications and tools!</p>
+            <div class="project-tags">
+                <span class="tag">Future</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="https://github.com/PizzaSl0th" target="_blank">GitHub</a> ·
+            Built with Claude Code
+        </p>
+    </footer>
+
+    <script>
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Search
+        document.getElementById('search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(this.value)}`;
+            }
+        });
+    </script>
+</body>
+</html>
