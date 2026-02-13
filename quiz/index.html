@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Homepage -->
+        <section id="homepage" class="page active">
+            <h1>Quiz Challenge</h1>
+            <p class="subtitle">Test your knowledge!</p>
+
+            <div class="name-section">
+                <label for="player-name">Enter Your Name:</label>
+                <input type="text" id="player-name" placeholder="Your name..." maxlength="20">
+            </div>
+
+            <!-- Quiz Mode Selection -->
+            <div class="mode-section">
+                <h2>Select Quiz Mode</h2>
+
+                <!-- Daily Quiz Option -->
+                <div class="mode-card" data-mode="daily">
+                    <div class="mode-header">
+                        <span class="mode-icon">📅</span>
+                        <h3>Daily Quiz</h3>
+                    </div>
+                    <p class="mode-description">Same 10 questions for everyone today. Compare scores with friends!</p>
+                    <div class="daily-info">
+                        <span id="daily-date"></span>
+                    </div>
+                </div>
+
+                <!-- Custom Quiz Option -->
+                <div class="mode-card" data-mode="custom">
+                    <div class="mode-header">
+                        <span class="mode-icon">🎯</span>
+                        <h3>Custom Quiz</h3>
+                    </div>
+                    <p class="mode-description">Choose your category and number of questions.</p>
+
+                    <div class="custom-options" id="custom-options">
+                        <div class="option-group">
+                            <label for="category-select">Category:</label>
+                            <select id="category-select">
+                                <option value="all">All Categories</option>
+                                <option value="general">General Knowledge</option>
+                                <option value="science">Science</option>
+                                <option value="history">History</option>
+                                <option value="geography">Geography</option>
+                                <option value="entertainment">Entertainment & Culture</option>
+                                <option value="sports">Sports</option>
+                                <option value="technology">Technology</option>
+                                <option value="nature">Nature & Animals</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label for="length-select">Questions:</label>
+                            <select id="length-select">
+                                <option value="5">5 Questions</option>
+                                <option value="10" selected>10 Questions</option>
+                                <option value="15">15 Questions</option>
+                                <option value="20">20 Questions</option>
+                            </select>
+                        </div>
+                        <p class="available-count">Available: <span id="available-questions">0</span> questions</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="start-quiz" class="btn btn-primary" disabled>Start Quiz</button>
+
+            <div class="leaderboard-section">
+                <h2>Leaderboard</h2>
+                <div class="leaderboard-tabs">
+                    <button class="tab-btn active" data-tab="daily">Daily</button>
+                    <button class="tab-btn" data-tab="monthly">Monthly</button>
+                    <button class="tab-btn" data-tab="yearly">Yearly</button>
+                </div>
+
+                <div id="daily-leaderboard" class="leaderboard active">
+                    <h3 id="daily-title"></h3>
+                    <ol id="daily-scores"></ol>
+                </div>
+
+                <div id="monthly-leaderboard" class="leaderboard">
+                    <h3 id="monthly-title"></h3>
+                    <ol id="monthly-scores"></ol>
+                </div>
+
+                <div id="yearly-leaderboard" class="leaderboard">
+                    <h3 id="yearly-title"></h3>
+                    <ol id="yearly-scores"></ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Page -->
+        <section id="quiz-page" class="page">
+            <div class="quiz-header">
+                <span id="player-display"></span>
+                <span id="question-counter">Question 1/10</span>
+                <span id="score-display">Score: 0</span>
+            </div>
+
+            <div class="quiz-mode-badge" id="quiz-mode-badge"></div>
+
+            <div class="quiz-content">
+                <div class="question-box">
+                    <h2 id="question-text"></h2>
+                </div>
+
+                <div id="answers" class="answers-grid"></div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="next-btn" class="btn btn-secondary" style="display: none;">Next Question</button>
+            </div>
+        </section>
+
+        <!-- Results Page -->
+        <section id="results-page" class="page">
+            <h1>Quiz Complete!</h1>
+            <div class="results-box">
+                <p class="player-result">Well done, <span id="result-name"></span>!</p>
+                <div class="score-circle">
+                    <span id="final-score">0</span>
+                    <span id="score-total" class="score-total">/10</span>
+                </div>
+                <p id="score-message"></p>
+                <p id="quiz-type-result" class="quiz-type-result"></p>
+            </div>
+
+            <button id="play-again" class="btn btn-primary">Play Again</button>
+            <button id="back-home" class="btn btn-secondary">Back to Home</button>
+        </section>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>

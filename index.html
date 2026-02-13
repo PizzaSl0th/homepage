@@ -150,16 +150,9 @@
             --accent-end: #ff6600;
         }
 
-        .project-card.placeholder {
-            --accent-start: #7b2fff;
-            --accent-end: #ff2d95;
-            opacity: 0.5;
-            cursor: default;
-        }
-
-        .project-card.placeholder:hover {
-            transform: none;
-            box-shadow: none;
+        .project-card.quiz {
+            --accent-start: #e94560;
+            --accent-end: #ff6b6b;
         }
 
         footer {
@@ -278,14 +271,19 @@
             </div>
         </a>
 
-        <div class="project-card placeholder">
-            <div class="project-icon">🚀</div>
-            <h2>Coming Soon</h2>
-            <p>More projects will be added here as they're created. Stay tuned for new applications and tools!</p>
+        <a href="./quiz/" class="project-card quiz">
+            <div class="project-icon">🧠</div>
+            <h2>Quiz Challenge</h2>
+            <p>Daily quiz with the same questions for everyone, or custom quizzes by category. Features leaderboards for daily, monthly, and yearly high scores.</p>
             <div class="project-tags">
-                <span class="tag">Future</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Quiz</span>
+                <span class="tag">Leaderboard</span>
             </div>
-        </div>
+            <div class="project-link">
+                <span>Open Project →</span>
+            </div>
+        </a>
     </div>
 
     <footer>
